@@ -3,6 +3,7 @@
 # --------------------------
 import os
 from dotenv import load_dotenv, dotenv_values
+# You need to add a "." here in addition to "__init__.py" for it to work
 from .mysql_schema_test import SCHEMA
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
