@@ -23,22 +23,30 @@ llm = ChatGoogleGenerativeAI(
 # --------------------------
 # Section: Define Prompt
 # --------------------------
-prompt_template = ChatPromptTemplate.from_template("""
-  Given the database schema: {schema}.
-  Generate a SQL SELECT query for the following user input: {user_input}.
+template = """
+  You are a MySQL expert.
+  Your goal is to create syntactically correct MySQL query to run, then look at the results of the query and return the answer to the input question.
+
+  Given the MySQL database schemas: {schema}.
+  Generate MySQL "SELECT" query based on the following user input: {user_input}.
   
-  DO NOT make any DML statements (INSERT, UPDATE, DELETE, DROP etc.) to the database.
-  To start you should ALWAYS look at the tables in the database to see what you can query.
-  Do NOT skip this step.
-
-  DO NOT MAKE UP INFORMATION.
-  If there are no tables or properties based on user's specifications say "The database do not have that information". 
-
-  Do not use '*' when generating SELECT.
-  Only displays minimum 3 and maximum 5 properties in the schema. The schema's primary key(s) must always be used in SELECT query.
-  If there are tables need to be joined, always use 'JOIN' to join tables.
-  Always use 'LIMIT' to limit the out to 50 rows.
-""")
+  You strictly follow these goals and rules below. No yapping and do not make up information. DO NOT skip this step.
+  DO:
+  - ONLY displays minimum 3 and maximum 5 properties in the schema. 
+  - The schema's primary key(s) must ALWAYS be used in "SELECT" query.
+  - ONLY use relevant tables to the user specifications or columns that are needed to answer user question.
+  - ALWAYS look at the tables in the database to see what you can query and use ONLY the column names you can see in the tables below.
+  - Pay attention to which column is in which table.
+  - Order the results to return the most informative data in the database.
+  - Use "JOIN" when joining multiple tables.
+  - Use 'LIMIT' to limit the output to 10 rows.
+  DO NOT:
+  - Use "*" when generating "SELECT" query.
+  - Make any DML statements (INSERT, UPDATE, DELETE, DROP etc.) to the database.
+  - Use "DISTINCT".
+  - Query for columns that do not exist.
+"""
+prompt_template = ChatPromptTemplate.from_template(template=template)
 
 # --------------------------
 # Section: Define Output Parser
