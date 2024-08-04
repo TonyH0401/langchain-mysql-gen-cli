@@ -38,7 +38,7 @@ def create_sqlite_query(question):
     reponse = chain.invoke({"question": question})
     # Reformat the response
     extracted = reponse.strip("```sqlite").replace("\n", "")
-    # Execute the reformated query
+    # Execute the reformated query, technically you will use an sql execution tool but because of the format you can't
     executed = db.run(extracted)
     # Return the data
     return extracted, executed
