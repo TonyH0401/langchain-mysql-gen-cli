@@ -3,7 +3,7 @@
 # --------------------------
 from chinook_sqlite_db_qa.test_chinook import create_sqlite_query, create_sqlite_query_2
 from mysql_db_qa.test_mysql import create_mysql_query
-
+from mysql_db_qa_2.test_mysql_2 import starting
 
 def chinook_main():
     # List of questions
@@ -31,6 +31,7 @@ if __name__ == "__main__":
     try:
         print(">> Hello World Main")
         # chinook_main()
-        mysql_main()
+        # mysql_main()
+        starting()
     except Exception as e:
         print(f">> Exception message: {e}")
