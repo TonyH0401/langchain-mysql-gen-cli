@@ -1,39 +1,35 @@
 # --------------------------
 # Section:
 # --------------------------
-from chinook_sqlite_db_qa.test_chinook import connect_chinook_db, get_db_dialect, get_db_table_names, execute_query, create_sqlite_query, extract_sqlite_query
+from chinook_sqlite_db_qa.test_chinook import create_sqlite_query, create_sqlite_query_2
+from mysql_db_qa.test_mysql import create_mysql_query
 
-
-# --------------------------
-# Section:
-# --------------------------
 
 def chinook_main():
-    # Connect to sqlite database
-    db = connect_chinook_db()
-    # Get SQL dialect (it is sqlite)
-    dialect = get_db_dialect(db=db)
-    print("> SQL Dialect:\n\t", dialect)
-    # Get all Tables
-    table_names = get_db_table_names(db=db)
-    print("> SQL Tables:\n\t", table_names)
-    # Execute sample query
-    # sample_query = "SELECT * FROM Artist LIMIT 10;"
-    # executed_query = execute_query(db=db, query=sample_query)
-    # print("> Executed Query:\n\t", executed_query)
-    # Test generating query
+    # List of questions
     question_1 = "How many employees are there?"
     question_2 = "List customers with last name start with the letter J"
-    raw_reponse = create_sqlite_query(db=db, question=question_2)
-    print("> Query:\n\t", raw_reponse)
-    extracted_response = extract_sqlite_query(raw_reponse)
-    test = execute_query(db=db, query=extracted_response)
-    print("> Execute Generated:\n\t", test)
+    question_3 = "List most popular album"
+    # Test 1
+    result_1 = create_sqlite_query(question=question_1)
+    print(result_1)
+    # Test 2
+    # result_2 = create_sqlite_query_2(question=question_2)
+    # print(result_2)
+
+
+def mysql_main():
+    # List of question
+    question_1 = "Listing popular Ticket types that customers bought this year"
+    # Test 1
+    result_1 = create_mysql_query(question=question_1)
+    print(result_1)
 
 
 if __name__ == "__main__":
     try:
         print(">> Hello World Main")
-        chinook_main()
+        # chinook_main()
+        mysql_main()
     except Exception as e:
         print(f">> Exception message: {e}")
