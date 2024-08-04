@@ -21,8 +21,9 @@ def chinook_main():
 def mysql_main():
     # List of question
     question_1 = "Listing popular Ticket types that customers bought this year"
+    question_2 = "How many event are there?"
     # Test 1
-    result_1 = create_mysql_query(question=question_1)
+    result_1 = create_mysql_query(question=question_2)
     print(result_1)
 
 
