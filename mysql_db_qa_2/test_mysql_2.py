@@ -63,7 +63,7 @@ import os
 #     response = chain.invoke({"schema": SCHEMA, "user_input": question})
 #     return response
 
-from .schema_utils import read_sql_schema_file
+from .schema_utils import read_sql_schema_file, convert_schemas_to_json
 
 
 def starting():
@@ -73,8 +73,8 @@ def starting():
     if check_file is False:
         print("> File path is incorrect! File does not exist!")
         return
-    sql_result = read_sql_schema_file(filepath=filepath_2)
-    if sql_result is None:
+    mysql_schemas = read_sql_schema_file(filepath=filepath_2)
+    if mysql_schemas is None:
         print("> There are no data in SQL file!")
         return
-    print("y0y")
+    convert_schemas_to_json(raw_db_schemas=mysql_schemas)
