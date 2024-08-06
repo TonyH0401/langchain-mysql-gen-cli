@@ -3,7 +3,7 @@
 # --------------------------
 from chinook_sqlite_db_qa.test_chinook import create_sqlite_query, create_sqlite_query_2
 from mysql_db_qa.test_mysql import create_mysql_query
-from mysql_db_qa_2.test_mysql_2 import load_schemas_from_file, convert_schemas_to_json_markdown, create_mysql_query_2, create_mysql_query_2_2
+from mysql_db_qa_2.test_mysql_2 import load_schemas_from_file, convert_schemas_to_json_markdown, create_mysql_query_2, using_llm_convert_schemas_to_json
 
 
 def chinook_main():
@@ -41,7 +41,8 @@ def mysql_main_2():
     #     schema=json_markdown_schemas, question=question_1)
     # print(result_1)
     # Test 2
-    result_2 = create_mysql_query_2_2(raw_schemas, question_2)
+    json_schemas = using_llm_convert_schemas_to_json(raw_schemas)
+    result_2 = create_mysql_query_2(json_schemas, question_1)
     print(result_2)
 
 

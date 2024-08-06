@@ -102,10 +102,3 @@ def using_llm_convert_schemas_to_json(schemas):
     chain = prompt | llm | parser
     response = chain.invoke({"schemas": schemas})
     return response
-
-
-def create_mysql_query_2_2(schemas, question):
-    json_schemas = using_llm_convert_schemas_to_json(schemas)
-    # print(json_schemas)
-    response = chain.invoke({"schema": json_schemas, "user_input": question})
-    return response
