@@ -27,7 +27,8 @@ automatically generated).
     - https://python.langchain.com/v0.2/docs/how_to/#output-parsers.
 
 - Fully LLM method: Another approach is to ask the LLM (fully) to extract the columns inside the raw schemas, basically letting the LLM do 
-all the work (reading and extracting from raw schemas). This has a high change of hallucination.
+all the work (reading and extracting from raw schemas). This has a high change of hallucination. This I implemented, it is pretty accurate
+but it is pretty slow as well.
 """
 
 
