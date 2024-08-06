@@ -63,7 +63,7 @@ import os
 #     response = chain.invoke({"schema": SCHEMA, "user_input": question})
 #     return response
 
-from .schema_utils import read_sql_schema_file, convert_schemas_to_json
+from .schema_utils import read_sql_schema_file, convert_schemas_to_json, convert_json_to_markdown
 
 
 def starting():
@@ -77,4 +77,6 @@ def starting():
     if mysql_schemas is None:
         print("> There are no data in SQL file!")
         return
-    convert_schemas_to_json(raw_db_schemas=mysql_schemas)
+    json_schema = convert_schemas_to_json(raw_db_schemas=mysql_schemas)
+    json_markdown_schema = convert_json_to_markdown(json=json_schema)
+    print(json_markdown_schema)
