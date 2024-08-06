@@ -3,7 +3,7 @@
 # --------------------------
 from chinook_sqlite_db_qa.test_chinook import create_sqlite_query, create_sqlite_query_2
 from mysql_db_qa.test_mysql import create_mysql_query
-from mysql_db_qa_2.test_mysql_2 import load_schemas_from_file, convert_schemas_to_json_markdown, create_mysql_query_2
+from mysql_db_qa_2.test_mysql_2 import load_schemas_from_file, convert_schemas_to_json_markdown, create_mysql_query_2, create_mysql_query_2_2
 
 
 def chinook_main():
@@ -32,13 +32,17 @@ def mysql_main_2():
     # List of question
     question_1 = "List the top 10 employees with the highest salaries"
     question_2 = "How many employees are there?"
-    # Test 1
+    # Load the schemas from file
     raw_schemas = load_schemas_from_file()
-    json_markdown_schemas = convert_schemas_to_json_markdown(
-        mysql_schemas=raw_schemas)
-    result_1 = create_mysql_query_2(
-        schema=json_markdown_schemas, question=question_1)
-    print(result_1)
+    # Test 1
+    # json_markdown_schemas = convert_schemas_to_json_markdown(
+    #     mysql_schemas=raw_schemas)
+    # result_1 = create_mysql_query_2(
+    #     schema=json_markdown_schemas, question=question_1)
+    # print(result_1)
+    # Test 2
+    result_2 = create_mysql_query_2_2(raw_schemas, question_2)
+    print(result_2)
 
 
 if __name__ == "__main__":

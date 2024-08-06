@@ -82,3 +82,30 @@ def convert_schemas_to_json_markdown(mysql_schemas):
 def create_mysql_query_2(schema, question):
     response = chain.invoke({"schema": schema, "user_input": question})
     return response
+
+
+def using_llm_convert_schemas_to_json(schemas):
+    template = """
+        You are an information extracting expert.
+        Your goal is to extract column information from the provided schemas and convert them into JSON format.
+        
+        Schemas: {schemas}
+
+        You strictly follow these goals and rules below. No yapping and do not make up information. DO NOT skip this step. 
+        - The schema table name is the JSON object name.
+        - Each column is a property in the JSON object.
+        - The value of each property is the datatype of each column.
+        - Include property for "PRIMARY KEY" and "CONSTRAINT".
+        - Extract the information and return the extracted data in JSON format.
+    """
+    prompt = ChatPromptTemplate.from_template(template=template)
+    chain = prompt | llm | parser
+    response = chain.invoke({"schemas": schemas})
+    return response
+
+
+def create_mysql_query_2_2(schemas, question):
+    json_schemas = using_llm_convert_schemas_to_json(schemas)
+    # print(json_schemas)
+    response = chain.invoke({"schema": json_schemas, "user_input": question})
+    return response
