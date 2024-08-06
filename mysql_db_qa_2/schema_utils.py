@@ -15,18 +15,19 @@ def read_sql_schema_file(filepath):
 
 
 """ 
-- Original method: Code the 
+- Problem: Currently, we are using raw schemas to generate queries. I learnt that markdown and json format is best used for LLM (in this
+paritcular case), so I want to convert the raw schemas into json then into markdown. I have several method of approach.
 
-There is another way which is using LLM + output_parser_structure, 
-the llm will read the schemas and output will return the structure 
+- Original method: Code the json formatter and markdown by yourself. This I implemented.
 
-- https://python.langchain.com/v0.2/docs/how_to/structured_output/ (gotta read it all, I stopped at Few-shot)
-- https://python.langchain.com/v0.2/docs/how_to/#output-parsers.
--> we have to pre-defined the properties we want to take out
+- Structured Output Parser method: Using LLM + output_parser_structure, the LLM will read the raw schemas and the output parser will return
+the structured result. However, with this method, we need to pre-defined the structure and the properties we want to take out first (not 
+automatically generated). 
+    - https://python.langchain.com/v0.2/docs/how_to/structured_output/ (gotta read it all, I stopped at Few-shot)
+    - https://python.langchain.com/v0.2/docs/how_to/#output-parsers.
 
-Another method is to ask the LLM to extract it basically let it do all the work but high chance of hallucination.
-
-
+- Fully LLM method: Another approach is to ask the LLM (fully) to extract the columns inside the raw schemas, basically letting the LLM do 
+all the work (reading and extracting from raw schemas). This has a high change of hallucination.
 """
 
 
